@@ -9,19 +9,21 @@ def register(surface, text = "Type Name of P1"):
     name = ''
     font = pygame.font.SysFont('arial',30)
     line1 = font.render(text, True, (250, 255, 255))
-    surface.blit(line1 , (400, 25))
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
-                done = True
+                return None
             elif event.type == KEYDOWN:
                 if event.key == K_RETURN:
                     return name if name != '' else 'Anon' + str(randint(1,1010101010))
+                if event.key == K_BACKSPACE:
+                    name = name[:-1]
                 else:
                     name += event.unicode
         name_obj = font.render(name, True, (255, 255, 255))
-        
+        surface.fill((0,0,0))
         surface.blit(name_obj , (0, 250))
+        surface.blit(line1 , (400, 25))
         pygame.display.update()
     
 
